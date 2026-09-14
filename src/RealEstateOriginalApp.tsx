@@ -3,7 +3,6 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import { useState, useEffect } from "react";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
@@ -20,41 +19,8 @@ import LeadCapture from "./components/LeadCapture";
 import Footer from "./components/Footer";
 import LiveChat from "./components/LiveChat";
 import WhatsAppButton from "./components/WhatsAppButton";
-import RealEstateBot from "./components/RealEstateBot";
-import DentalBot from "./components/DentalBot";
 
 export default function App() {
-  const [currentRoute, setCurrentRoute] = useState<string>("/");
-
-  useEffect(() => {
-    const syncRoute = () => {
-      const path = window.location.pathname.toLowerCase();
-      const search = window.location.search.toLowerCase();
-      if (path === "/dental" || search.includes("dental") || search.includes("industry=dental")) {
-        setCurrentRoute("/dental");
-      } else if (path === "/speed-to-lead" || path === "/bot" || search.includes("speed-to-lead") || search.includes("industry=real_estate")) {
-        setCurrentRoute("/speed-to-lead");
-      } else {
-        setCurrentRoute("/");
-      }
-    };
-
-    syncRoute();
-    window.addEventListener("popstate", syncRoute);
-    return () => window.removeEventListener("popstate", syncRoute);
-  }, []);
-
-  // Sub-route: Dedicated Real Estate Speed-to-Lead Simulator
-  if (currentRoute === "/speed-to-lead") {
-    return <RealEstateBot />;
-  }
-
-  // Sub-route: Dedicated Dental Clinical Intake & Bleed Engine
-  if (currentRoute === "/dental") {
-    return <DentalBot />;
-  }
-
-  // Default Route (/): Original Ultra-Luxury JM Real Estate Portal
   return (
     <div className="min-h-screen bg-primary font-sans text-text-primary overflow-x-hidden selection:bg-gold/30 selection:text-charcoal">
       <Navbar />
