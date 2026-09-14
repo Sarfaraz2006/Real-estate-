@@ -15,6 +15,7 @@ import AgentIntro from "./components/AgentIntro";
 import BeforeAfter from "./components/BeforeAfter";
 import MortgageCalculator from "./components/MortgageCalculator";
 import ROICalculator from "./components/ROICalculator";
+import AutomationBleedShowcase from "./components/AutomationBleedShowcase";
 import Testimonials from "./components/Testimonials";
 import LeadCapture from "./components/LeadCapture";
 import Footer from "./components/Footer";
@@ -44,22 +45,26 @@ export default function App() {
     return () => window.removeEventListener("popstate", syncRoute);
   }, []);
 
-  // Sub-route: Dedicated Real Estate Speed-to-Lead Simulator
+  // Sub-route: Dedicated Real Estate Standalone Sandbox
   if (currentRoute === "/speed-to-lead") {
     return <RealEstateBot />;
   }
 
-  // Sub-route: Dedicated Dental Clinical Intake & Bleed Engine
+  // Sub-route: Dedicated Dental Clinical Standalone Sandbox
   if (currentRoute === "/dental") {
     return <DentalBot />;
   }
 
-  // Default Route (/): Original Ultra-Luxury JM Real Estate Portal
+  // Default Route (/): The Grand Luxury Real Estate Landing Page with Integrated 60s Automation Bleed Showcase
   return (
     <div className="min-h-screen bg-primary font-sans text-text-primary overflow-x-hidden selection:bg-gold/30 selection:text-charcoal">
       <Navbar />
       <Hero />
       <Stats />
+      
+      {/* Flagship Integrated Feature: 60s Lead Qualifier & Financial Bleed Engine */}
+      <AutomationBleedShowcase />
+
       <SearchFilter />
       <FeaturedListings />
       <PropertyMap />
