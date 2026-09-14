@@ -1,73 +1,125 @@
-@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;1,400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-serif: "Playfair Display", Georgia, serif;
-  --font-mono: "JetBrains Mono", monospace;
+  --font-serif: "Cormorant Garamond", serif;
+  --font-display: "Playfair Display", serif;
+  --font-sans: "Inter", sans-serif;
 
-  --color-canvas: #050608;
-  --color-surface: #0a0d14;
-  --color-card: #0f141f;
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-border-glow: rgba(212, 175, 55, 0.25);
-  --color-accent-gold: #d4af37;
-  --color-accent-teal: #00f0ff;
-  --color-accent-emerald: #10b981;
-  --color-accent-rose: #f43f5e;
+  --color-primary: #ffffff;
+  --color-offwhite: #f8f6f1;
+  --color-charcoal: #1a1a1a;
+  --color-gold: #b8960c;
+  --color-light-gold: #d4af37;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #666666;
+  --color-whatsapp: #25d366;
 }
 
 @layer base {
   body {
-    background-color: #050608;
-    color: #f1f5f9;
-    font-family: var(--font-sans);
-    overflow-x: hidden;
+    @apply font-sans text-text-primary bg-primary;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-serif;
   }
 }
 
-/* Apple-grade glass specular */
-.glass-panel {
-  background: radial-gradient(120% 120% at 50% 0%, rgba(26, 32, 46, 0.6) 0%, rgba(10, 13, 20, 0.85) 100%);
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+/* Custom utilities for 3D flip cards */
+.perspective-1000 {
+  perspective: 1000px;
+}
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+.backface-hidden {
+  backface-visibility: hidden;
+}
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+.group:hover .group-hover\:rotate-y-180 {
+  transform: rotateY(180deg);
 }
 
-.glass-card {
-  background: rgba(15, 20, 31, 0.7);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+/* Leaflet map styles */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  z-index: 10;
 }
 
-.glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-2px);
+/* Shimmer animations */
+@keyframes shimmer {
+  0% {
+    transform: translateX(-150%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(150%) skewX(-15deg);
+  }
 }
 
-/* Custom glow */
-.glow-gold {
-  box-shadow: 0 0 35px -5px rgba(212, 175, 55, 0.25);
+.shimmer-card {
+  position: relative;
+  overflow: hidden;
 }
 
-.glow-teal {
-  box-shadow: 0 0 35px -5px rgba(0, 240, 255, 0.22);
+.shimmer-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(212, 175, 55, 0.2) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%) skewX(-15deg);
+  animation: shimmer 2s ease-in-out forwards;
+  pointer-events: none;
+  z-index: 10;
 }
 
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+/* Delay shimmer for different cards */
+.shimmer-card:nth-child(1)::after { animation-delay: 0.2s; }
+.shimmer-card:nth-child(2)::after { animation-delay: 0.4s; }
+.shimmer-card:nth-child(3)::after { animation-delay: 0.6s; }
+.shimmer-card:nth-child(4)::after { animation-delay: 0.8s; }
+.shimmer-card:nth-child(5)::after { animation-delay: 1.0s; }
+.shimmer-card:nth-child(6)::after { animation-delay: 1.2s; }
+
+/* Button hover shimmer */
+.btn-shimmer {
+  position: relative;
+  overflow: hidden;
 }
-::-webkit-scrollbar-track {
-  background: #07090e;
+
+.btn-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: translateX(-150%) skewX(-15deg);
+  transition: transform 0.6s ease-in-out;
+  pointer-events: none;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.25);
+
+.btn-shimmer:hover::after {
+  transform: translateX(250%) skewX(-15deg);
 }

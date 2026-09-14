@@ -19,8 +19,8 @@ export default function Hero() {
             type="video/mp4"
           />
         </video>
-        {/* Luxury dark gradient overlay for specular contrast */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/90 z-0"></div>
+        {/* Subtle dark overlay */}
+        <div className="absolute inset-0 bg-black/30"></div>
       </div>
 
       {/* Floating Badge */}
